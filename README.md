@@ -10,4 +10,4 @@ A custom Kubernetes sidecar project to use p2p.
     - [ ] Dockerfile
     - [ ] goreleaser
     - [ ] Makefile tasks
-
+    - [ ] DockerHub Repository
