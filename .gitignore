@@ -19,3 +19,5 @@ out
 ### Go Patch ###
 /vendor/
 /Godeps/
+
+dist/

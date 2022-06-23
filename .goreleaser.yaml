@@ -1,0 +1,77 @@
+env:
+  - GO111MODULE=on
+
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - main: ./cmd/sidepeer/main.go
+    id: "sidepeer"
+    binary: sidepeer
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    env:
+      - CGO_ENABLED=0
+
+dockers:
+- image_templates: ["igumus/{{.ProjectName}}:{{ .Version }}-amd64"]
+  dockerfile: Dockerfile
+  use: buildx
+  ids:
+    - sidepeer
+  build_flag_templates:
+  - --platform=linux/amd64
+  - --label=org.opencontainers.image.title={{ .ProjectName }}
+  - --label=org.opencontainers.image.description={{ .ProjectName }}
+  - --label=org.opencontainers.image.url=https://github.com/igumus/{{ .ProjectName }}
+  - --label=org.opencontainers.image.source=https://github.com/igumus/{{ .ProjectName }}
+  - --label=org.opencontainers.image.version={{ .Version }}
+  - --label=org.opencontainers.image.revision={{ .FullCommit }}
+  - --label=org.opencontainers.image.licenses=MIT
+- image_templates: ["igumus/{{.ProjectName}}:{{ .Version }}-arm64v8"]
+  goarch: arm64
+  dockerfile: Dockerfile
+  use: buildx
+  ids:
+    - sidepeer
+  build_flag_templates:
+  - --platform=linux/arm64/v8
+  - --label=org.opencontainers.image.title={{ .ProjectName }}
+  - --label=org.opencontainers.image.description={{ .ProjectName }}
+  - --label=org.opencontainers.image.url=https://github.com/igumus/{{ .ProjectName }}
+  - --label=org.opencontainers.image.source=https://github.com/igumus/{{ .ProjectName }}
+  - --label=org.opencontainers.image.version={{ .Version }}
+  - --label=org.opencontainers.image.revision={{ .FullCommit }}
+  - --label=org.opencontainers.image.licenses=MIT
+
+docker_manifests:
+- name_template: igumus/{{.ProjectName}}:{{ .Version }}
+  image_templates:
+  - igumus/{{.ProjectName}}:{{.Version}}-amd64
+  - igumus/{{.ProjectName}}:{{.Version}}-arm64v8
+- name_template: igumus/{{.ProjectName}}:latest
+  image_templates:
+  - igumus/{{.ProjectName}}:{{.Version}}-amd64
+  - igumus/{{.ProjectName}}:{{.Version}}-arm64v8
+
+source:
+  enabled: false
+
+changelog:
+  skip: true
+
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      amd64: x86_64
+    builds:
+      - sidepeer
+    format_overrides:
+      - goos: windows
+        format: zip
