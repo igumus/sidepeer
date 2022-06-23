@@ -6,8 +6,8 @@ A custom Kubernetes sidecar project to use p2p.
 
 ## TODOs
 - Prepare Step
-    - [ ] Project Structure
-    - [ ] Dockerfile
-    - [ ] goreleaser
-    - [ ] Makefile tasks
-    - [ ] DockerHub Repository
+    - [x] Project Structure
+    - [x] Dockerfile
+    - [x] goreleaser
+    - [x] Makefile tasks
+    - [x] DockerHub Repository
