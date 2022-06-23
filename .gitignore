@@ -3,7 +3,7 @@
 *.iml
 .vscode/
 .DS_Store
-out
+sidepeer
 
 # Binaries, plugins, libs
 *.dll
