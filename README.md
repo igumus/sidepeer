@@ -11,3 +11,9 @@ A custom Kubernetes sidecar project to use p2p.
     - [x] goreleaser
     - [x] Makefile tasks
     - [x] DockerHub Repository
+- Peer Step
+    - [x] libp2p Host implementation
+    - [x] libp2p Router implementation
+    - [ ] integrate `blockstorage`
+- CI/CD
+  - [ ] Add github Flow
