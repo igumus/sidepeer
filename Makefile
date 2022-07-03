@@ -8,7 +8,7 @@ all: help
 
 ## Build:
 tidy: ## Tidy project
-	go mod tidy
+	go mod tidy -compat=1.17
 
 clean: ## Cleans temporary folder
 	rm -rf /tmp/peer*

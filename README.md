@@ -14,6 +14,6 @@ A custom Kubernetes sidecar project to use p2p.
 - Peer Step
     - [x] libp2p Host implementation
     - [x] libp2p Router implementation
-    - [ ] integrate `blockstorage`
+    - [x] integrate `blockstorage`
 - CI/CD
   - [ ] Add github Flow

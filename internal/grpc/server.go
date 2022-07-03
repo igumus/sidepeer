@@ -22,7 +22,11 @@ type grpcServer struct {
 	listener net.Listener
 }
 
-func NewGrpcServer(ctx context.Context, opts ...GrpcServerOption) (GrpcServer, error) {
+func New(ctx context.Context, port int) (GrpcServer, error) {
+	return newWithOptions(ctx, WithPort(port))
+}
+
+func newWithOptions(ctx context.Context, opts ...GrpcServerOption) (GrpcServer, error) {
 	cfg, cfgErr := applyOptions(opts...)
 	if cfgErr != nil {
 		return nil, cfgErr
@@ -49,7 +53,7 @@ func (gs *grpcServer) Start() error {
 	}
 	gs.listener = listen
 	go func() {
-		log.Printf("info: starting grpc server at: %s\n", gs.addr)
+		log.Printf("info: grpc listening on : %s\n", gs.addr)
 		gs.app.Serve(gs.listener)
 	}()
 	return nil
